@@ -1,0 +1,19 @@
+{
+  "name": "sauldt-store",
+  "private": true,
+  "description": "SauldT: tienda de ropa de marca. Strapi 5 (backend) + Next.js 16 (tienda y dashboard).",
+  "scripts": {
+    "install:all": "npm --prefix apps/backend install && npm --prefix apps/web install",
+    "dev:backend": "npm --prefix apps/backend run develop",
+    "dev:web": "npm --prefix apps/web run dev",
+    "build:backend": "npm --prefix apps/backend run build",
+    "build:web": "npm --prefix apps/web run build",
+    "lint": "npm --prefix apps/web run lint",
+    "typecheck": "npx --prefix apps/web tsc --noEmit -p apps/web && npx --prefix apps/backend tsc --noEmit -p apps/backend",
+    "tokens": "cd apps/backend && node scripts/create-api-tokens.js ../web/.env.local",
+    "stripe:listen": "stripe listen --forward-to localhost:3000/api/webhooks/stripe"
+  },
+  "engines": {
+    "node": ">=20.9.0"
+  }
+}

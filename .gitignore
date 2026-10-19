@@ -1,0 +1,27 @@
+# Dependencias y builds
+node_modules/
+.next/
+dist/
+build/
+.strapi/
+
+# Secretos: nunca se suben al repositorio
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Datos locales
+apps/backend/.tmp/
+apps/backend/public/uploads/*
+!apps/backend/public/uploads/.gitkeep
+*.db
+*.sqlite
+
+# Sistema / editor
+.DS_Store
+Thumbs.db
+*.log
+.vscode/*
+!.vscode/extensions.json

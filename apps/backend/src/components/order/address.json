@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_order_addresses",
+  "info": {
+    "displayName": "Dirección",
+    "icon": "pinMap"
+  },
+  "options": {},
+  "attributes": {
+    "name": { "type": "string" },
+    "line1": { "type": "string" },
+    "line2": { "type": "string" },
+    "city": { "type": "string" },
+    "state": { "type": "string" },
+    "postalCode": { "type": "string" },
+    "country": { "type": "string" },
+    "phone": { "type": "string" }
+  }
+}

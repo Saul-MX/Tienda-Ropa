@@ -1,0 +1,3 @@
+# Strapi es solo el backend: no debe indexarse en buscadores.
+User-Agent: *
+Disallow: /

@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_product_variants",
+  "info": {
+    "displayName": "Variante",
+    "icon": "layer",
+    "description": "Combinación de talla y color con su propio SKU e inventario."
+  },
+  "options": {},
+  "attributes": {
+    "sku": {
+      "type": "string",
+      "required": true,
+      "maxLength": 64,
+      "regex": "^[A-Za-z0-9-_]+$"
+    },
+    "size": {
+      "type": "string",
+      "required": true,
+      "maxLength": 12
+    },
+    "color": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::color.color"
+    },
+    "stock": {
+      "type": "integer",
+      "required": true,
+      "min": 0,
+      "default": 0
+    }
+  }
+}

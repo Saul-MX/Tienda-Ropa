@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "size_guides",
+  "info": {
+    "singularName": "size-guide",
+    "pluralName": "size-guides",
+    "displayName": "Guía de tallas",
+    "description": "measurements: { \"headers\": [\"Talla\",\"Pecho (cm)\"], \"rows\": [[\"S\",\"88-94\"]] }"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "sizeSystem": {
+      "type": "enumeration",
+      "enum": [
+        "letras",
+        "numerico",
+        "calzado",
+        "unica"
+      ],
+      "required": true,
+      "default": "letras"
+    },
+    "measurements": {
+      "type": "json",
+      "required": true
+    },
+    "notes": {
+      "type": "text"
+    },
+    "notesEn": {
+      "type": "text"
+    }
+  }
+}

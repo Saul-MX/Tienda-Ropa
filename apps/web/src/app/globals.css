@@ -1,0 +1,161 @@
+@import 'tailwindcss';
+
+/*
+ * SauldT — sistema visual
+ * Blanco de galería + gris piedra frío detrás de cada foto; negro puro para el texto.
+ * El rojo de señal se reserva para rebajas y errores: si aparece, significa algo.
+ */
+@theme {
+  --color-paper: #ffffff;
+  --color-stone: #ececea;
+  --color-stone-deep: #dcdcd9;
+  --color-line: #d9d9d5;
+  --color-ink: #000000;
+  --color-muted: #5f5f63;
+  --color-signal: #d0021b;
+  --color-ok: #1f6f43;
+
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+
+  /* Escala tipográfica 1.25 (tercera mayor) sobre 16px */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5625rem;
+  --text-2xl: 1.953rem;
+  --text-3xl: 2.441rem;
+  --text-4xl: 3.052rem;
+
+  --container-page: 90rem;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Logotipo: Archivo en su ancho máximo. Es la única pieza "ruidosa" del sistema. */
+  .wordmark {
+    font-stretch: 125%;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 0.85;
+  }
+
+  .display {
+    font-stretch: 112%;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+  }
+
+  .page-x {
+    padding-inline: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .page-x {
+      padding-inline: 2rem;
+    }
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 3rem;
+    padding-inline: 1.5rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: var(--text-sm);
+    transition: background-color 150ms, color 150ms, border-color 150ms;
+  }
+
+  .btn-primary {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  .btn-primary:hover {
+    background: #2b2b2b;
+  }
+
+  .btn-primary:disabled {
+    background: var(--color-stone-deep);
+    color: var(--color-muted);
+    cursor: not-allowed;
+  }
+
+  .btn-outline {
+    border: 1px solid var(--color-ink);
+  }
+
+  .btn-outline:hover {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  .field {
+    width: 100%;
+    min-height: 3rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-line);
+    background: var(--color-paper);
+    font-size: var(--text-base);
+  }
+
+  .field:focus {
+    border-color: var(--color-ink);
+    outline: none;
+  }
+
+  .link {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 1px;
+  }
+}

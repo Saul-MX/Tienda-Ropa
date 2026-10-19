@@ -1,0 +1,78 @@
+{
+  "kind": "collectionType",
+  "collectionName": "collections",
+  "info": {
+    "singularName": "collection",
+    "pluralName": "collections",
+    "displayName": "Colección",
+    "description": "Colecciones de temporada o cápsula."
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 80
+    },
+    "nameEn": {
+      "type": "string",
+      "maxLength": 80
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name",
+      "required": true
+    },
+    "season": {
+      "type": "enumeration",
+      "enum": [
+        "primavera-verano",
+        "otono-invierno",
+        "capsula",
+        "permanente"
+      ],
+      "required": true,
+      "default": "capsula"
+    },
+    "year": {
+      "type": "integer",
+      "min": 2000,
+      "max": 2100
+    },
+    "description": {
+      "type": "text"
+    },
+    "descriptionEn": {
+      "type": "text"
+    },
+    "cover": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false
+    },
+    "active": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    },
+    "products": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::product.product",
+      "inversedBy": "collections"
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
+    }
+  }
+}

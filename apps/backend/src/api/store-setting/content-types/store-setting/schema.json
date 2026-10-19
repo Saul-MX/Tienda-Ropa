@@ -1,0 +1,81 @@
+{
+  "kind": "singleType",
+  "collectionName": "store_settings",
+  "info": {
+    "singularName": "store-setting",
+    "pluralName": "store-settings",
+    "displayName": "Ajustes de la tienda"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "announcement": {
+      "type": "string",
+      "maxLength": 140
+    },
+    "announcementEn": {
+      "type": "string",
+      "maxLength": 140
+    },
+    "heroTitle": {
+      "type": "string",
+      "maxLength": 80
+    },
+    "heroTitleEn": {
+      "type": "string",
+      "maxLength": 80
+    },
+    "heroSubtitle": {
+      "type": "text",
+      "maxLength": 240
+    },
+    "heroSubtitleEn": {
+      "type": "text",
+      "maxLength": 240
+    },
+    "heroImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "freeShippingMinMxn": {
+      "type": "decimal",
+      "required": true,
+      "default": 1999,
+      "min": 0
+    },
+    "freeShippingMinUsd": {
+      "type": "decimal",
+      "required": true,
+      "default": 120,
+      "min": 0
+    },
+    "shippingCostMxn": {
+      "type": "decimal",
+      "required": true,
+      "default": 199,
+      "min": 0
+    },
+    "shippingCostUsd": {
+      "type": "decimal",
+      "required": true,
+      "default": 12,
+      "min": 0
+    },
+    "lowStockThreshold": {
+      "type": "integer",
+      "required": true,
+      "default": 3,
+      "min": 0
+    },
+    "instagramUrl": {
+      "type": "string"
+    },
+    "tiktokUrl": {
+      "type": "string"
+    }
+  }
+}

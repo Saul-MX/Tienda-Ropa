@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "newsletter_subscribers",
+  "info": {
+    "singularName": "newsletter-subscriber",
+    "pluralName": "newsletter-subscribers",
+    "displayName": "Suscriptor newsletter"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "email": {
+      "type": "email",
+      "required": true,
+      "unique": true
+    },
+    "locale": {
+      "type": "enumeration",
+      "enum": [
+        "es",
+        "en"
+      ],
+      "default": "es"
+    },
+    "active": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

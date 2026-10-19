@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_order_items",
+  "info": {
+    "displayName": "Artículo de pedido",
+    "icon": "shoppingCart",
+    "description": "Copia de los datos del producto al momento de la compra."
+  },
+  "options": {},
+  "attributes": {
+    "sku": { "type": "string", "required": true },
+    "productDocumentId": { "type": "string" },
+    "productName": { "type": "string", "required": true },
+    "productSlug": { "type": "string" },
+    "brandName": { "type": "string" },
+    "categoryName": { "type": "string" },
+    "gender": { "type": "string" },
+    "size": { "type": "string" },
+    "colorName": { "type": "string" },
+    "image": { "type": "string" },
+    "quantity": { "type": "integer", "required": true, "min": 1 },
+    "unitPrice": { "type": "decimal", "required": true, "min": 0 }
+  }
+}

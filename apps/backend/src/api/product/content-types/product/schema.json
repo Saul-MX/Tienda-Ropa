@@ -1,0 +1,136 @@
+{
+  "kind": "collectionType",
+  "collectionName": "products",
+  "info": {
+    "singularName": "product",
+    "pluralName": "products",
+    "displayName": "Producto",
+    "description": "Prendas de la tienda. El inventario se maneja por variante (talla + color)."
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 120
+    },
+    "nameEn": {
+      "type": "string",
+      "maxLength": 120
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "descriptionEn": {
+      "type": "text"
+    },
+    "material": {
+      "type": "string",
+      "maxLength": 200
+    },
+    "materialEn": {
+      "type": "string",
+      "maxLength": 200
+    },
+    "gender": {
+      "type": "enumeration",
+      "enum": ["hombre", "mujer", "unisex"],
+      "required": true,
+      "default": "unisex"
+    },
+    "priceMxn": {
+      "type": "decimal",
+      "required": true,
+      "min": 0
+    },
+    "priceUsd": {
+      "type": "decimal",
+      "required": true,
+      "min": 0
+    },
+    "salePriceMxn": {
+      "type": "decimal",
+      "min": 0
+    },
+    "salePriceUsd": {
+      "type": "decimal",
+      "min": 0
+    },
+    "images": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": ["images"]
+    },
+    "brand": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::brand.brand",
+      "inversedBy": "products"
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category.category",
+      "inversedBy": "products"
+    },
+    "collections": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::collection.collection",
+      "mappedBy": "products"
+    },
+    "sizeSystem": {
+      "type": "enumeration",
+      "enum": ["letras", "numerico", "calzado", "unica"],
+      "required": true,
+      "default": "letras"
+    },
+    "sizeGuide": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::size-guide.size-guide"
+    },
+    "variants": {
+      "type": "component",
+      "repeatable": true,
+      "component": "product.variant",
+      "required": true
+    },
+    "reviews": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::review.review",
+      "mappedBy": "product"
+    },
+    "isNew": {
+      "type": "boolean",
+      "default": false
+    },
+    "isBestseller": {
+      "type": "boolean",
+      "default": false
+    },
+    "isFeatured": {
+      "type": "boolean",
+      "default": false
+    },
+    "active": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
+    }
+  }
+}
