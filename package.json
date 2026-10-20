@@ -11,7 +11,7 @@
     "lint": "npm --prefix apps/web run lint",
     "typecheck": "npx --prefix apps/web tsc --noEmit -p apps/web && npx --prefix apps/backend tsc --noEmit -p apps/backend",
     "tokens": "cd apps/backend && node scripts/create-api-tokens.js ../web/.env.local",
-    "stripe:listen": "stripe listen --forward-to localhost:3000/api/webhooks/stripe"
+    "stripe:listen": "stripe listen --events checkout.session.completed,checkout.session.async_payment_succeeded,checkout.session.async_payment_failed,checkout.session.expired,charge.refunded --forward-to localhost:3000/api/webhooks/stripe"
   },
   "engines": {
     "node": ">=20.9.0"

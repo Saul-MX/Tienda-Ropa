@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useId, useMemo, useState } from 'react';
+import { useId, useMemo, useRef, useState } from 'react';
 import { useCart } from '@/lib/cart/store';
 import { getDictionary, type Locale } from '@/lib/i18n';
 
@@ -36,19 +36,39 @@ export function AddToCart({ locale, variants, sizes, cartHref }: Props) {
   const [color, setColor] = useState(firstInStock?.color?.slug ?? colors[0]?.slug ?? null);
   const [size, setSize] = useState<string | null>(sizes.length === 1 ? sizes[0] : null);
   const [added, setAdded] = useState(false);
+  const [needsSize, setNeedsSize] = useState(false);
+  const root = useRef<HTMLDivElement>(null);
 
   const forColor = variants.filter((v) => (color ? v.color?.slug === color : true));
   const selected = forColor.find((v) => v.size === size) ?? null;
   const colorLabel = colors.find((c) => c.slug === color)?.name;
 
+  /**
+   * Lee la talla y el color marcados directamente del formulario: si alguien hizo clic
+   * antes de que la página terminara de cargar, el estado de React no se enteró, pero
+   * el radio sí quedó marcado en pantalla.
+   */
   function onAdd() {
-    if (!selected || selected.stock === 0) return;
-    add(selected.sku, 1);
+    const checked = (name: string) =>
+      root.current?.querySelector<HTMLInputElement>(`input[name="${id}-${name}"]:checked`)?.value ?? null;
+    const pickedColor = checked('color') ?? color;
+    const pickedSize = checked('size') ?? size;
+    const variant = variants.find((v) => v.size === pickedSize && (pickedColor ? v.color?.slug === pickedColor : true));
+
+    setColor(pickedColor);
+    setSize(pickedSize);
+    if (!variant || variant.stock === 0) {
+      setNeedsSize(true);
+      setAdded(false);
+      return;
+    }
+    add(variant.sku, 1);
+    setNeedsSize(false);
     setAdded(true);
   }
 
   return (
-    <div className="space-y-6">
+    <div ref={root} className="space-y-6">
       {colors.length > 0 && (
         <fieldset>
           <legend className="mb-3 text-sm">
@@ -97,6 +117,7 @@ export function AddToCart({ locale, variants, sizes, cartHref }: Props) {
                   onChange={() => {
                     setSize(s);
                     setAdded(false);
+                    setNeedsSize(false);
                   }}
                   className="peer sr-only"
                 />
@@ -113,11 +134,12 @@ export function AddToCart({ locale, variants, sizes, cartHref }: Props) {
         )}
       </fieldset>
 
-      <button type="button" className="btn btn-primary w-full" disabled={!selected || selected.stock === 0} onClick={onAdd}>
-        {!firstInStock ? t.soldOut : selected ? t.addToCart : t.selectSize}
+      <button type="button" className="btn btn-primary w-full" disabled={!firstInStock} onClick={onAdd}>
+        {firstInStock ? t.addToCart : t.soldOut}
       </button>
 
-      <p role="status" className="min-h-6 text-sm">
+      <p role="status" className={`min-h-6 text-sm ${needsSize ? 'text-signal' : ''}`}>
+        {needsSize && t.selectSize}
         {added && (
           <>
             {t.added}.{' '}

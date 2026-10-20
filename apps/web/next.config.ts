@@ -40,6 +40,9 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   poweredByHeader: false,
+  // Solo afecta a `next dev`: además de localhost, permite abrir la tienda como 127.0.0.1
+  // o desde la IP de tu red (p. ej. para probar en el celular). Sin esto los botones no responden.
+  allowedDevOrigins: ['127.0.0.1', '192.168.*.*'],
   reactStrictMode: true,
   turbopack: {
     rules: {
